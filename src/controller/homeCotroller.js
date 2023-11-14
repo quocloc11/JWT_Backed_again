@@ -1,3 +1,4 @@
+import userService from '../service/userService'
 
 
 const handleHelloword = (req, res) => {
@@ -6,6 +7,15 @@ const handleHelloword = (req, res) => {
 const handleUserPage = (req, res) => {
     return res.render("user.ejs")
 }
+const handleCreateNewUser = (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+    let username = req.body.username
+
+    //userService.createNewUser(email, password, username)
+    userService.getUserList()
+    return res.send("handleCreateNewUser")
+}
 module.exports = {
-    handleHelloword, handleUserPage
+    handleHelloword, handleUserPage, handleCreateNewUser
 }
