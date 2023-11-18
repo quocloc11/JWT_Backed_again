@@ -4,33 +4,29 @@ import initWebRoutes from "./routes/web"
 require("dotenv").config()
 import bodyParser from 'body-parser'
 import connection from "./config/connectDB"
-
+import initApiRoutes from './routes/api'
+import confidCors from "./config/cors"
 
 
 
 const app = express();
+const PORT = process.env.PORT || 8080;
+
+//fix cors
+confidCors(app)
 
 configViewEngine(app)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// fix loi CORS 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', process.env.REACT_URL)
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,PATCH,DELETE')
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
-    res.setHeader('Access-Control-Allow-Credentials', true)
-
-    next()
-})
 
 //test connetion
 connection()
 
 initWebRoutes(app)
+initApiRoutes(app)
 
-const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log("Backend run = " + PORT)
 })

@@ -4,7 +4,9 @@ const testApi = (req, res) => {
         data: 'test api'
     })
 }
-
+const handleRegister = (req, res) => {
+    console.log("call", req.body)
+}
 module.exports = {
-    testApi
+    testApi, handleRegister
 }
