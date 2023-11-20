@@ -1,3 +1,4 @@
+import e from 'express'
 import loginRegisterService from '../service/loginRegisterService'
 const testApi = (req, res) => {
     return res.status(200).json({
@@ -38,11 +39,22 @@ const handleRegister = async (req, res) => {
     }
 }
 const handleLogin = async (req, res) => {
-    console.log("check", req.body)
-    return res.status(200).json({
-        message: 'OK',
-        data: 'test api'
-    })
+    try {
+        let data = await loginRegisterService.handleUserLogin(req.body)
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT,
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            EM: 'error',
+            EC: '-1',
+            DT: '',
+        })
+    }
+
 }
 module.exports = {
     testApi, handleRegister, handleLogin
