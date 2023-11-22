@@ -18,7 +18,7 @@ const getAllUser = async () => {
             return {
                 EM: "Something wrong with service",
                 EC: 1,
-                DT: {},
+                DT: [],
             }
         }
     } catch (e) {
@@ -26,7 +26,34 @@ const getAllUser = async () => {
         return {
             EM: "Something wrong with service",
             EC: 1,
-            DT: {},
+            DT: [],
+        }
+    }
+}
+const getUserWithPagination = async (page, limit) => {
+    try {
+        let offset = (page - 1) * limit
+        const { count, rows } = await db.User.findAndCountAll({
+            offset: offset,
+            limit: limit
+        })
+        let totalPages = Math.ceil(count / limit)
+        let data = {
+            totalRows: count,
+            totalPage: totalPages,
+            users: rows
+        }
+        return {
+            EM: "OK",
+            EC: 0,
+            DT: data,
+        }
+    } catch (e) {
+        console.log(e)
+        return {
+            EM: "Something wrong with service",
+            EC: 1,
+            DT: [],
         }
     }
 }
@@ -66,5 +93,5 @@ const deleteUser = async (id) => {
 }
 
 module.exports = {
-    getAllUser, createNewUser, updateUser, deleteUser
+    getAllUser, createNewUser, updateUser, deleteUser, getUserWithPagination
 }
