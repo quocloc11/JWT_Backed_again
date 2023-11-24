@@ -30,8 +30,6 @@ const checkPhoneExist = async (userPhone) => {
 
 const registerNewUser = async (rawUserData) => {
     try {
-
-
         let isEmailExit = await checkEmailExist(rawUserData.email)
 
         if (isEmailExit === true) {
@@ -114,5 +112,5 @@ const handleUserLogin = async (rawData) => {
     }
 }
 module.exports = {
-    registerNewUser, handleUserLogin
+    registerNewUser, handleUserLogin, hashPassword, checkEmailExist, checkPhoneExist
 }
