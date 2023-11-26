@@ -6,8 +6,10 @@ const handleHelloword = (req, res) => {
 }
 const handleUserPage = async (req, res) => {
 
+    console.log('Cookies: ', req.cookies)
+
     let userList = await userService.getUserList()
-    await userService.deleteUser(1)
+
     return res.render("user.ejs", { userList })
 
 }

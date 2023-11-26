@@ -6,7 +6,7 @@ import bodyParser from 'body-parser'
 import connection from "./config/connectDB"
 import initApiRoutes from './routes/api'
 import confidCors from "./config/cors"
-
+import cookieParser from 'cookie-parser'
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -19,6 +19,8 @@ configViewEngine(app)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//config cookie parse
+app.use(cookieParser())
 
 //test connetion
 connection()

@@ -57,8 +57,6 @@ const getUserList = async () => {
         raw: true,
         nest: true
     })
-    console.log("check new user", newUser)
-    console.log("check new r", r)
 
 
     let users = []
