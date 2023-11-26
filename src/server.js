@@ -23,9 +23,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //test connetion
 connection()
 
+
 initWebRoutes(app)
 initApiRoutes(app)
 
+app.use((req, res) => {
+    return res.send('404 not found')
+})
 app.listen(PORT, () => {
     console.log("Backend run = " + PORT)
 })
