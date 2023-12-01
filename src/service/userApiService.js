@@ -92,6 +92,11 @@ const createNewUser = async (data) => {
         }
     } catch (e) {
         console.log(e)
+        return {
+            EM: "something wrongs with service",
+            EC: 1,
+            DT: [],
+        }
     }
 }
 const updateUser = async (data) => {
